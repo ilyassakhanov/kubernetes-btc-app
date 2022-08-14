@@ -9,3 +9,5 @@ spec:
   ports:
   - port: 80
     targetPort: 80
+
+# One of other attempts to expose the service; doesn't work
