@@ -1,19 +1,14 @@
-FROM ubuntu:18.04
-# Copying code
-ADD btc-app my_files
+FROM python:3.7
+# Switching workdir
+WORKDIR /opt/app
 
-WORKDIR my_files
-# Running updates
-RUN apt update
-RUN apt upgrade -y
-# Installing python runtime and packet manager
-RUN apt install python3 -y
-RUN apt install python3-pip -y
-# Installing dependencies for ther code
-RUN pip3 install -r requirements.txt
+# Copying code
+COPY btc-app . 
+
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Exposing a port
-EXPOSE 5000/tcp
+EXPOSE 5000
 
 # Running a server
-ENTRYPOINT python3 fetch_btc.py
+CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
