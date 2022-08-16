@@ -2,7 +2,7 @@
 
 
 ```
-This app was supposed to kun in Kubernetes cluster and return current Bitcoin prices. Currently, it doesn't work due to issues in exposing the service outside Kubernetes cluster.
+This app is supposed in Kubernetes cluster and return current Bitcoin prices in EUR and CZK. 
 ```
 ## Used software
 
@@ -25,11 +25,21 @@ docker build -t your-image-name .
 ### Without rebuiding container with app
 
 ```
+minikube start // Skip this one if it is running already
 kubectl apply -f ./deployment.yml
 minikube service custom-deployment-service
 ```
 
 ## Usage
 
-After running previous commands, a new tab in your default browser should open with the result. 
+After running previous commands, a new tab in your default browser should open with the result.
 If not, copy the last URL that was shown after running all commands and curl it/put it in a browser.(i.e curl http://127.0.0.1:1234567)
+
+ If it is not starting immidiately give it some time and make sure that you have access to the Internet
+
+## Removal
+
+```
+kubectl delete deployment custom-deployment
+kubectl delete service custom-deployment-service
+```
