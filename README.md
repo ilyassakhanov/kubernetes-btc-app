@@ -26,10 +26,10 @@ docker build -t your-image-name .
 
 ```
 kubectl apply -f ./deployment.yml
+minikube service custom-deployment-service
 ```
 
 ## Usage
 
-```
-App is not in a working state
-```
+After running previous commands, a new tab in your default browser should open with the result. 
+If not, copy the last URL that was shown after running all commands and curl it/put it in a browser.(i.e curl http://127.0.0.1:1234567)

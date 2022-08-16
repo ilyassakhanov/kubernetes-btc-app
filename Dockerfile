@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM tiangolo/uwsgi-nginx-flask:python3.8-alpine
 # Switching workdir
 WORKDIR /opt/app
 
