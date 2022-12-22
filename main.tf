@@ -6,18 +6,23 @@ provider "aws" {
 
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "ilyas-states"
-   tags = {
+
+  # Prevent accidental deletion of this S3 bucket
+  lifecycle {
+    prevent_destroy = true
+  }
+  tags = {
     Name        = "states bucket"
     Environment = "Dev"
   }
 }
 
 resource "aws_s3_bucket_versioning" "terraform_state" {
-    bucket = aws_s3_bucket.terraform_state.id
+  bucket = aws_s3_bucket.terraform_state.id
 
-    versioning_configuration {
-      status = "Enabled"
-    }
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
 
 resource "aws_dynamodb_table" "terraform_state_lock" {
