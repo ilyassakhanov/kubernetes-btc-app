@@ -8,9 +8,9 @@ resource "aws_s3_bucket" "terraform_state" {
   bucket = "ilyas-states"
 
   # Prevent accidental deletion of this S3 bucket
-  lifecycle {
-    prevent_destroy = true
-  }
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
   tags = {
     Name        = "states bucket"
     Environment = "Dev"
