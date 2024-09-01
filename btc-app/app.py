@@ -15,12 +15,13 @@ def get_btc_price():
 
 def get_exchange_rate():
     # Creating a connector to fetch exchange rate
-    http = urllib3.PoolManager()
-    # Fetching exchange rate data from Yahoo Finance
-    conversion_data = http.request('GET','https://query1.finance.yahoo.com/v7/finance/quote?symbols=EURCZK=X' )
-    processed_conversion_data = json.loads(conversion_data.data.decode("utf-8"))
-    # Getting exchange rate at CCY exchange last closure
-    conversion_rate = processed_conversion_data['quoteResponse']['result'][0]['regularMarketPreviousClose']
+    # http = urllib3.PoolManager() #FIXME
+    # # Fetching exchange rate data from Yahoo Finance
+    # conversion_data = http.request('GET','https://query1.finance.yahoo.com/v7/finance/quote?symbols=EURCZK=X' )
+    # processed_conversion_data = json.loads(conversion_data.data.decode("utf-8"))
+    # # Getting exchange rate at CCY exchange last closure
+    # conversion_rate = processed_conversion_data['quoteResponse']['result'][0]['regularMarketPreviousClose']
+    conversion_rate = 25
     return conversion_rate
 
 def main():
@@ -52,4 +53,4 @@ def get_rates():
 
 
 if __name__ == '__main__':
-    api.run() 
+    api.run(host='0.0.0.0', port=8080,debug=True)
