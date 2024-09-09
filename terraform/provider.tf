@@ -2,14 +2,14 @@ terraform {
  required_providers {
    aws = {
      source  = "hashicorp/aws"
-     version = "~> 4.19.0"
+     version = "~> 5.53.0"
    }
  }
 
   backend "s3" {
-   bucket = "ilyas-states"
+   bucket = "ilyas-state"
    key    = "state"
-   region = "eu-central-1"
+   region = "us-east-2"
  }
 
 }

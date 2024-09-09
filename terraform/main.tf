@@ -1,16 +1,16 @@
 provider "aws" {
-  region = "eu-central-1"
+  region = "us-east-2"
 }
 
 
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "ilyas-states"
+  bucket = "ilyas-state"
 
   # Prevent accidental deletion of this S3 bucket
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
+  lifecycle {
+    prevent_destroy = true
+  }
   tags = {
     Name        = "states bucket"
     Environment = "Dev"
