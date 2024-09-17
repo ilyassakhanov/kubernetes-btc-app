@@ -40,7 +40,7 @@ resource "aws_default_subnet" "public_subnet2" {
 
 
 
-resource "aws_default_subnet" "default_az3" {
+resource "aws_default_subnet" "public_subnet3" {
   availability_zone       = "us-east-2c"
   map_public_ip_on_launch = true
 
@@ -64,4 +64,32 @@ resource "aws_internet_gateway" "gw" {
   tags = {
     Name = "main"
   }
+}
+
+resource "aws_route_table" "route_table" {
+ vpc_id = aws_default_vpc.default.id
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
+ route {
+   cidr_block = "0.0.0.0/0"
+   gateway_id = aws_internet_gateway.gw.id
+ }
+}
+
+resource "aws_route_table_association" "subnet1_route" {
+ subnet_id      = aws_default_subnet.public_subnet1.id
+ route_table_id = aws_route_table.route_table.id
+}
+
+resource "aws_route_table_association" "subnet2_route" {
+ subnet_id      = aws_default_subnet.public_subnet2.id
+ route_table_id = aws_route_table.route_table.id
+}
+
+resource "aws_route_table_association" "subnet3_route" {
+ subnet_id      = aws_default_subnet.public_subnet3.id
+ route_table_id = aws_route_table.route_table.id
 }
